@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BB... ❤️</title>
+
+<style>
+/* =====================================================
+   RESET
+===================================================== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+:root{
+  --bg:#07070a;
+  --wine:#48132d;
+  --pink:#ffb3c7;
+  --gold:#e8c37a;
+  --soft:#f4edf2;
+  --purple:#24112f;
+  --glass:rgba(255,255,255,0.08);
+  --border:rgba(255,255,255,0.12);
+  --shadow:0 20px 60px rgba(0,0,0,.45);
+}
+
+body{
+  background:
+    radial-gradient(circle at top,#4d1430 0%,transparent 25%),
+    radial-gradient(circle at bottom,#2a1636 0%,transparent 25%),
+    linear-gradient(135deg,#07070a,#120912,#1d1023);
+  color:var(--soft);
+  font-family: "Segoe UI", sans-serif;
+  overflow-x:hidden;
+  min-height:100vh;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  backdrop-filter:blur(2px);
+  pointer-events:none;
+}
+
+/* =====================================================
+   PARTICLES
+===================================================== */
+#particles{
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  z-index:0;
+  pointer-events:none;
+}
+
+.particle{
+  position:absolute;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.25);
+  animation:float linear infinite;
+}
+
+@keyframes float{
+  from{
+    transform:translateY(100vh) scale(0.2);
+    opacity:0;
+  }
+  20%{
+    opacity:1;
+  }
+  to{
+    transform:translateY(-10vh) scale(1);
+    opacity:0;
+  }
+}
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+.app{
+  position:relative;
+  z-index:2;
+  width:100%;
+  max-width:100vw;
+}
+
+.screen{
+  display:none;
+  min-height:100vh;
+  padding:28px 22px 110px;
+  align-items:center;
+  justify-content:center;
+  animation:fade 1.2s ease;
+}
+
+.screen.active{
+  display:flex;
+}
+
+@keyframes fade{
+  from{
+    opacity:0;
+    transform:translateY(30px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.card{
+  width:100%;
+  max-width:650px;
+  background:var(--glass);
+  border:1px solid var(--border);
+  border-radius:30px;
+  padding:28px;
+  backdrop-filter:blur(20px);
+  box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.05),transparent);
+  pointer-events:none;
+}
+
+.badge{
+  display:inline-flex;
+  padding:8px 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,0.08);
+  color:var(--gold);
+  font-size:12px;
+  letter-spacing:2px;
+  margin-bottom:22px;
+}
+
+.title{
+  font-size:2.3rem;
+  line-height:1.15;
+  margin-bottom:18px;
+  font-weight:700;
+}
+
+.text{
+  font-size:1.05rem;
+  line-height:1.95;
+  color:#efe6ec;
+  opacity:.92;
+  margin-bottom:26px;
+}
+
+.highlight{
+  color:var(--pink);
+  font-weight:600;
+}
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+.actions{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+
+.btn{
+  border:none;
+  padding:16px 22px;
+  border-radius:18px;
+  cursor:pointer;
+  font-size:1rem;
+  transition:.35s;
+  position:relative;
+  overflow:hidden;
+}
+
+.btn-primary{
+  background:linear-gradient(135deg,#d57aa5,#7e3057);
+  color:white;
+  box-shadow:0 10px 30px rgba(213,122,165,.35);
+}
+
+.btn-secondary{
+  background:rgba(255,255,255,0.08);
+  color:white;
+  border:1px solid rgba(255,255,255,0.08);
+}
+
+.btn:hover{
+  transform:translateY(-3px) scale(1.02);
+}
+
+.btn:active{
+  transform:scale(.98);
+}
+
+/* =====================================================
+   IMAGES
+===================================================== */
+.memory-photo{
+  width:100%;
+  height:280px;
+  object-fit:cover;
+  border-radius:24px;
+  margin:22px 0;
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 15px 45px rgba(0,0,0,.35);
+}
+
+.polaroid{
+  background:white;
+  padding:12px 12px 50px;
+  border-radius:8px;
+  transform:rotate(-2deg);
+  margin:26px auto;
+  max-width:320px;
+  box-shadow:0 18px 40px rgba(0,0,0,.4);
+}
+
+.polaroid img{
+  width:100%;
+  border-radius:4px;
+}
+
+.polaroid p{
+  color:#222;
+  text-align:center;
+  margin-top:14px;
+  font-size:.95rem;
+}
+
+/* =====================================================
+   COUNTER
+===================================================== */
+.counter{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+  margin:24px 0;
+}
+
+.counter-item{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:18px;
+  padding:20px;
+  text-align:center;
+}
+
+.counter-item h3{
+  font-size:2rem;
+  color:var(--gold);
+}
+
+.counter-item span{
+  opacity:.75;
+}
+
+/* =====================================================
+   TYPEWRITER
+===================================================== */
+.typewriter{
+  border-right:2px solid rgba(255,255,255,.6);
+  white-space:pre-wrap;
+  overflow:hidden;
+}
+
+/* =====================================================
+   MUSIC PANEL
+===================================================== */
+.music-player{
+  position:fixed;
+  bottom:18px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:100;
+  background:rgba(0,0,0,.35);
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:20px;
+  padding:14px 18px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  width:calc(100% - 24px);
+  max-width:450px;
+}
+
+.music-player button{
+  border:none;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#cf8cab,#7a3055);
+  color:white;
+  cursor:pointer;
+}
+
+.music-player input[type="range"]{
+  width:100%;
+}
+
+/* =====================================================
+   HEART RAIN
+===================================================== */
+.heart{
+  position:fixed;
+  top:-20px;
+  color:rgba(255,182,193,.4);
+  animation:fall linear forwards;
+  z-index:1;
+  pointer-events:none;
+}
+
+@keyframes fall{
+  to{
+    transform:translateY(110vh) rotate(360deg);
+    opacity:0;
+  }
+}
+
+/* =====================================================
+   FINAL SCREEN
+===================================================== */
+.final-title{
+  font-size:3rem;
+  line-height:1.1;
+  margin-bottom:22px;
+}
+
+.final-glow{
+  position:absolute;
+  width:300px;
+  height:300px;
+  background:radial-gradient(circle,rgba(255,182,193,.22),transparent 70%);
+  filter:blur(20px);
+  top:-100px;
+  right:-80px;
+  pointer-events:none;
+}
+
+.signature{
+  margin-top:35px;
+  opacity:.75;
+  font-size:.95rem;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+@media(max-width:600px){
+  .title{
+    font-size:1.9rem;
+  }
+
+  .text{
+    font-size:1rem;
+  }
+
+  .final-title{
+    font-size:2.2rem;
+  }
+
+  .counter-item h3{
+    font-size:1.7rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<div id="particles"></div>
+
+<div class="app">
+
+<!-- =====================================================
+     AUDIO
+===================================================== -->
+<audio id="bgMusic" loop>
+  <source src="assets/musica.mp3" type="audio/mpeg">
+</audio>
+
+<!-- =====================================================
+     MUSIC PLAYER
+===================================================== -->
+<div class="music-player">
+  <button onclick="toggleMusic()" id="musicBtn">▶</button>
+  <input type="range" min="0" max="1" step="0.01" value="0.5" id="volumeControl">
+</div>
+
+<!-- =====================================================
+     SCREEN 1
+===================================================== -->
+<section class="screen active" id="screen0">
+  <div class="card">
+    <div class="badge">PARA A MINHA BB</div>
+
+    <h1 class="title typewriter" id="openingText"></h1>
+
+    <p class="text">
+      Tem algumas coisas que eu preciso te mostrar.
+      Coisas que talvez eu nunca tenha conseguido colocar em palavras direito.
+      Mas hoje eu quero tentar.
+    </p>
+
+    <div class="actions">
+      <button class="btn btn-primary" onclick="startExperience()">
+        Clique aqui ❤️
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     SCREEN 2
+===================================================== -->
+<section class="screen" id="screen1">
+  <div class="card">
+    <div class="badge">ONDE TUDO COMEÇOU</div>
+
+    <h2 class="title">O Fórum.</h2>
+
+    <p class="text">
+      É engraçado pensar que tudo começou daquele jeito.
+      Sem grandes expectativas.
+      Sem imaginar o tamanho da importância que você teria na minha vida.
+      
+      A gente era só amizade.
+      Conversas.
+      Presença.
+      Risadas.
+      
+      E talvez o mais bonito disso tudo seja justamente o fato de que o amor nasceu de algo real.
+      Não foi rápido.
+      Não foi superficial.
+      Foi construído.
+    </p>
+
+    <img src="assets/foto1.jpg" class="memory-photo" alt="Foto do casal">
+
+    <div class="actions">
+      <button class="btn btn-secondary" onclick="previousScreen()">Voltar</button>
+      <button class="btn btn-primary" onclick="nextScreen()">Continuar</button>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     SCREEN 3
+===================================================== -->
+<section class="screen" id="screen2">
+  <div class="card">
+    <div class="badge">REENCONTRO</div>
+
+    <h2 class="title">2025 mudou tudo.</h2>
+
+    <p class="text">
+      No final de 2024 eu te chamei pra sair.
+      E honestamente?
+      Eu fiquei meio frustrado quando não aconteceu.
+      
+      Mas a vida fez a gente se encontrar de novo depois.
+      E hoje eu fico pensando que talvez as coisas só precisassem acontecer no momento certo.
+      
+      Porque quando a gente voltou a conversar em 2025...
+      parecia diferente.
+      Mais leve.
+      Mais próximo.
+      Mais verdadeiro.
+    </p>
+
+    <div class="polaroid">
+      <img src="assets/foto2.jpg" alt="Memória">
+      <p>Talvez sem perceber, era aqui que nossa história realmente começava.</p>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-secondary" onclick="previousScreen()">Voltar</button>
+      <button class="btn btn-primary" onclick="nextScreen()">Lembrar desse dia</button>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     SCREEN 4
+===================================================== -->
+<section class="screen" id="screen3">
+  <div class="card">
+    <div class="badge">04/07/2025 — 18:30</div>
+
+    <h2 class="title">Quiero Café.</h2>
+
+    <p class="text">
+      Eu lembro daquele dia em detalhes.
+      
+      E eu também lembro do meu atraso.
+      Quase uma hora.
+      
+      Hoje, olhando pra trás, eu penso no quanto aquilo poderia ter acabado com tudo antes mesmo de começar.
+      Mas você ficou.
+      Você esperou.
+      
+      E eu nunca te falei o suficiente o quanto isso mexeu comigo.
+      Porque naquele momento, mesmo sem perceber, você já estava me ensinando cuidado.
+      Paciência.
+      Presença.
+    </p>
+
+    <img src="assets/foto3.jpg" class="memory-photo" alt="Quiero Café">
+
+    <p class="text">
+      E quando eu finalmente cheguei...
+      você estava linda.
+      Engraçada.
+      Inteligente.
+      Divertida.
+      
+      E de algum jeito, naquele café, tudo parecia certo.
+    </p>
+
+    <div class="actions">
+      <button class="btn btn-secondary" onclick="previousScreen()">Voltar</button>
+      <button class="btn btn-primary" onclick="nextScreen()">Próxima memória</button>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     SCREEN 5
+===================================================== -->
+<section class="screen" id="screen4">
+  <div class="card">
+    <div class="badge">PRAINHA — TORRES/RS</div>
+
+    <h2 class="title">O primeiro beijo.</h2>
+
+    <p class="text">
+      Depois do café, a gente foi pra Prainha.
+      
+      E eu lembro daquele banco.
+      Do vento.
+      Da ansiedade.
+      Do silêncio que parecia dizer muita coisa.
+      
+      Quando a gente se beijou pela primeira vez...
+      eu senti felicidade.
+      Encanto.
+      Intensidade.
+      
+      Mas também senti medo.
+      Porque naquele momento eu percebi que você tinha se tornado alguém que eu realmente poderia perder.
+      E isso me assustou.
+      
+      Acho que foi ali que começou algo muito maior do que eu imaginava.
+    </p>
+
+    <div class="actions">
+      <button class="btn btn-secondary" onclick="previousScreen()">Voltar</button>
+      <button class="btn btn-primary" onclick="nextScreen()">Continuar ❤️</button>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     SCREEN 6
+===================================================== -->
+<section class="screen" id="screen5">
+  <div class="card">
+    <div class="badge">30 DE AGOSTO DE 2025</div>
+
+    <h2 class="title">O dia em que eu te pedi em namoro.</h2>
+
+    <p class="text">
+      Desde aquele primeiro encontro, cada final de semana contigo parecia passar rápido demais.
+      
+      E aos poucos você foi virando rotina.
+      Mas não aquela rotina cansativa.
+      
+      Você virou a parte boa dos meus dias.
+      A pessoa que eu queria contar as coisas.
+      A pessoa que eu queria perto.
+      
+      E no dia 30 de agosto de 2025...
+      eu só tive certeza do que meu coração já sabia fazia tempo.
+    </p>
+
+    <div class="counter">
+      <div class="counter-item">
+        <h3 id="days">0</h3>
+        <span>Dias</span>
+      </div>
+
+      <div class="counter-item">
+        <h3 id="hours">0</h3>
+        <span>Horas</span>
+      </div>
+
+      <div class="counter-item">
+        <h3 id="minutes">0</h3>
+        <span>Minutos</span>
+      </div>
+
+      <div class="counter-item">
+        <h3>∞</h3>
+        <span>Planos</span>
+      </div>
+    </div>
+
+    <p class="text">
+      Desde esse dia...
+      você transformou completamente a minha vida.
+    </p>
+
+    <div class="actions">
+      <button class="btn btn-secondary" onclick="previousScreen()">Voltar</button>
+      <button class="btn btn-primary" onclick="nextScreen()">Ouvir isso</button>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     SCREEN 7
+===================================================== -->
+<section class="screen" id="screen6">
+  <div class="card">
+    <div class="badge">SOBRE VOCÊ</div>
+
+    <h2 class="title">Você mudou a minha vida de um jeito absurdo.</h2>
+
+    <p class="text">
+      Eu gosto do teu sorriso.
+      Da tua inteligência.
+      Do teu jeito engraçado.
+      Das nossas conversas.
+      Da tua companhia.
+      
+      Mas principalmente...
+      eu gosto da pessoa que eu me tornei depois que você entrou na minha vida.
+      
+      Você me fez querer crescer.
+      Querer amadurecer.
+      Querer melhorar.
+      
+      E eu sei que às vezes eu erro.
+      Sei que não sou perfeito.
+      Mas existe uma coisa que é muito verdadeira:
+      
+      desde que você apareceu,
+      eu nunca mais quis viver do mesmo jeito de antes.
+    </p>
+
+    <img src="assets/foto4.jpg" class="memory-photo" alt="Bruna">
+
+    <p class="text">
+      Você fez um cara que parecia um adolescente de 29 anos começar a pensar em futuro de verdade.
+      E talvez essa seja uma das maiores provas do tamanho do que eu sinto por você.
+    </p>
+
+    <div class="actions">
+      <button class="btn btn-secondary" onclick="previousScreen()">Voltar</button>
+      <button class="btn btn-primary" onclick="nextScreen()">Continuar</button>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     SCREEN 8
+===================================================== -->
+<section class="screen" id="screen7">
+  <div class="card">
+    <div class="badge">O PRIMEIRO “EU TE AMO”</div>
+
+    <h2 class="title">Eu nunca tinha entendido isso antes.</h2>
+
+    <p class="text">
+      Naquela noite em que você disse que me amava...
+      eu respondi.
+      Mas por dentro eu fiquei pensando.
+      
+      Pensando no peso daquela palavra.
+      No significado.
+      No tamanho daquilo.
+      
+      Porque até então eu acho que eu nunca tinha entendido completamente o que era amar alguém.
+      
+      E foi convivendo contigo que eu percebi.
+      
+      Amar é querer ficar.
+      É querer construir.
+      É querer resolver.
+      É escolher a mesma pessoa de novo e de novo.
+      Mesmo nos dias difíceis.
+      
+      E honestamente?
+      Eu escolheria você em todos eles.
+    </p>
+
+    <div class="actions">
+      <button class="btn btn-secondary" onclick="previousScreen()">Voltar</button>
+      <button class="btn btn-primary" onclick="nextScreen()">Abrir carta</button>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     SCREEN 9
+===================================================== -->
+<section class="screen" id="screen8">
+  <div class="card">
+    <div class="badge">DESCULPAS</div>
+
+    <h2 class="title">Eu queria te dizer isso olhando nos teus olhos.</h2>
+
+    <p class="text">
+      BB...
+      eu sei que eu erro.
+      Sei que às vezes eu falho.
+      Sei que em alguns momentos eu posso ter te machucado ou feito você se sentir menos importante do que realmente é.
+      
+      E eu sinto muito por isso.
+      
+      Mas existe algo que eu preciso que você saiba:
+      
+      nada nesse relacionamento nunca foi falta de amor.
+      
+      Porque desde que você entrou na minha vida...
+      você se tornou prioridade.
+      
+      Você se tornou casa.
+      
+      E talvez o mais sincero que eu possa te dizer hoje é:
+      
+      eu nunca quero parar de lutar por nós.
+      
+      Nunca.
+    </p>
+
+    <div class="actions">
+      <button class="btn btn-secondary" onclick="previousScreen()">Voltar</button>
+      <button class="btn btn-primary" onclick="nextScreen()">Tem mais uma coisa...</button>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     SCREEN 10
+===================================================== -->
+<section class="screen" id="screen9">
+  <div class="card">
+    <div class="badge">FUTURO</div>
+
+    <h2 class="title">Eu penso em uma vida inteira contigo.</h2>
+
+    <p class="text">
+      Mesmo com menos de um ano juntos...
+      a gente já fala sobre casamento.
+      Sobre filhos.
+      Sobre futuro.
+      
+      E sabe o que é mais bonito nisso tudo?
+      
+      É que comigo nunca pareceu cedo.
+      
+      Porque você não parece passageira.
+      Você parece permanência.
+      
+      Às vezes eu fico imaginando a gente mais velho.
+      Uma casa nossa.
+      Risadas pela casa.
+      Nyla Maria correndo pela sala.
+      Nolan bagunçando tudo.
+      
+      E nós dois olhando um pro outro com aquela sensação de:
+      “caramba... a gente conseguiu.”
+    </p>
+
+    <img src="assets/foto5.jpg" class="memory-photo" alt="Futuro">
+
+    <div class="actions">
+      <button class="btn btn-secondary" onclick="previousScreen()">Voltar</button>
+      <button class="btn btn-primary" onclick="nextScreen()">Última parte ❤️</button>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     FINAL SCREEN
+===================================================== -->
+<section class="screen" id="screen10">
+  <div class="card">
+
+    <div class="final-glow"></div>
+
+    <div class="badge">FINAL</div>
+
+    <h1 class="final-title">
+      BB...
+      eu não consigo imaginar um futuro sem você.
+    </h1>
+
+    <p class="text">
+      E honestamente?
+      Nem quero.
+      
+      Você virou a melhor parte da minha vida.
+      A pessoa que eu mais amo.
+      A pessoa que me faz querer continuar.
+      
+      Se existir um lugar onde eu realmente pertenço...
+      é ao teu lado.
+      
+      Obrigado por ter esperado aquele cara atrasado no Quiero Café.
+      Obrigado por ter ficado.
+      Obrigado por amar alguém imperfeito.
+      
+      Eu prometo continuar tentando ser melhor.
+      Continuar crescendo.
+      Continuar escolhendo você.
+      
+      Hoje.
+      Amanhã.
+      E sempre.
+    </p>
+
+    <img src="assets/foto6.jpg" class="memory-photo" alt="Foto final">
+
+    <div class="actions">
+      <button class="btn btn-secondary" onclick="previousScreen()">Voltar</button>
+      <button class="btn btn-primary" onclick="createHeartRain()">
+        Eu te amo ❤️
+      </button>
+    </div>
+
+    <div class="signature">
+      Feito com amor por Tiago para Bruna.
+    </div>
+  </div>
+</section>
+
+</div>
+
+<script>
+/* =====================================================
+   VARIABLES
+===================================================== */
+const screens = document.querySelectorAll('.screen');
+let currentScreen = 0;
+
+const music = document.getElementById('bgMusic');
+const musicBtn = document.getElementById('musicBtn');
+const volumeControl = document.getElementById('volumeControl');
+
+/* =====================================================
+   START EXPERIENCE
+===================================================== */
+function startExperience(){
+  playMusic();
+  nextScreen();
+}
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+function nextScreen(){
+  if(currentScreen < screens.length - 1){
+    screens[currentScreen].classList.remove('active');
+    currentScreen++;
+    screens[currentScreen].classList.add('active');
+
+    window.scrollTo({
+      top:0,
+      behavior:'smooth'
+    });
+  }
+}
+
+function previousScreen(){
+  if(currentScreen > 0){
+    screens[currentScreen].classList.remove('active');
+    currentScreen--;
+    screens[currentScreen].classList.add('active');
+
+    window.scrollTo({
+      top:0,
+      behavior:'smooth'
+    });
+  }
+}
+
+/* =====================================================
+   MUSIC
+===================================================== */
+function playMusic(){
+  music.volume = volumeControl.value;
+  music.play();
+  musicBtn.innerHTML = '❚❚';
+}
+
+function pauseMusic(){
+  music.pause();
+  musicBtn.innerHTML = '▶';
+}
+
+function toggleMusic(){
+  if(music.paused){
+    playMusic();
+  } else {
+    pauseMusic();
+  }
+}
+
+volumeControl.addEventListener('input',()=>{
+  music.volume = volumeControl.value;
+});
+
+/* =====================================================
+   COUNTER
+===================================================== */
+function updateCounter(){
+  const startDate = new Date('2025-08-30T00:00:00');
+  const now = new Date();
+
+  const diff = now - startDate;
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+
+  document.getElementById('days').textContent = days;
+  document.getElementById('hours').textContent = hours;
+  document.getElementById('minutes').textContent = minutes;
+}
+
+setInterval(updateCounter,1000);
+updateCounter();
+
+/* =====================================================
+   TYPEWRITER
+===================================================== */
+function animateText(){
+  const element = document.getElementById('openingText');
+
+  const text = 'BB...\nàs vezes eu fico pensando em como a minha vida mudou depois que você apareceu.';
+
+  let i = 0;
+
+  function typing(){
+    if(i < text.length){
+      element.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typing,40);
+    }
+  }
+
+  typing();
+}
+
+animateText();
+
+/* =====================================================
+   PARTICLES
+===================================================== */
+function createParticles(){
+  const container = document.getElementById('particles');
+
+  for(let i=0;i<45;i++){
+    const particle = document.createElement('div');
+    particle.classList.add('particle');
+
+    particle.style.left = Math.random()*100+'vw';
+    particle.style.animationDuration = (8 + Math.random()*15)+'s';
+    particle.style.animationDelay = Math.random()*5+'s';
+    particle.style.width = particle.style.height = (2 + Math.random()*5)+'px';
+
+    container.appendChild(particle);
+  }
+}
+
+createParticles();
+
+/* =====================================================
+   HEART RAIN
+===================================================== */
+function createHeartRain(){
+  for(let i=0;i<35;i++){
+    const heart = document.createElement('div');
+
+    heart.classList.add('heart');
+    heart.innerHTML = '❤';
+
+    heart.style.left = Math.random()*100+'vw';
+    heart.style.fontSize = (12 + Math.random()*20)+'px';
+    heart.style.animationDuration = (4 + Math.random()*5)+'s';
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+      heart.remove();
+    },9000);
+  }
+}
+
+/* =====================================================
+   CACHE CLEAN (helps WebView)
+===================================================== */
+if ('caches' in window) {
+  caches.keys().then(function(names) {
+    names.forEach(function(name) {
+      caches.delete(name);
+    });
+  });
+}
+
+/* =====================================================
+   PRELOAD IMAGES
+===================================================== */
+function preloadImages(){
+  const images = [
+    'assets/foto1.jpg',
+    'assets/foto2.jpg',
+    'assets/foto3.jpg',
+    'assets/foto4.jpg',
+    'assets/foto5.jpg',
+    'assets/foto6.jpg'
+  ];
+
+  images.forEach(src=>{
+    const img = new Image();
+    img.src = src;
+  });
+}
+
+preloadImages();
+</script>
+</body>
+</html>
